@@ -12,8 +12,6 @@ sudo apt-get update
 # add nomodeset to grub loader
 # this may help with getting the screens working.
 
-# set up users
-
 
 #########################################
 # SOFTWARE
