@@ -157,7 +157,7 @@ ssh-keygen
 
 
 # set up sites-enables - see default.conf
-sudo nano /etc/apache2/sites-enabled/default.conf
+sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
 
 # create folders for silverstripe
 mkdir /var/www/ss4
