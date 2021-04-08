@@ -41,6 +41,11 @@ sudo apt -y install curl
 
 # install composer
 sudo apt-get -y install composer
+nano ~/.bashrc 
+# add one of these: 
+# - PATH=~/.composer/vendor/bin:$PATH
+# - PATH=~/.config/composer/vendor/bin:$PATH
+source ~/.bashrc
 
 # install php versions
 rm /usr/local/bin/php-switch-scripts -rf
