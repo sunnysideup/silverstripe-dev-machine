@@ -1,5 +1,9 @@
+# get latest and greatest
+sudo apt-get update
+
 # Installing the necessary packages
-#add nomodeset to grub loader
+# add nomodeset to grub loader
+# this may help with getting the screens working.
 
 # set up users
 
@@ -7,84 +11,109 @@
 https://www.google.com/chrome/
 https://linuxconfig.org/how-to-install-google-chrome-web-browser-on-ubuntu-20-04-focal-fossa
 
-#latest and greatest
-sudo apt-get update
-
-#git
+# install git
 sudo apt-get -y install git
 git config --global core.filemode false
 
-#apache
+# install apache
 sudo apt-get -y install apache2
 	
-#mysql
+# install mysql
 sudo apt-get install mysql-server
 sudo /usr/bin/mysql_secure_installation
 # https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
 mysql -u root -p[as you set it]
 # see: https://linuxconfig.org/how-to-reset-root-mysql-password-on-ubuntu-18-04-bionic-beaver-linux
 
-# apache modules
+# install additioanl apache modules
 sudo a2enmod rewrite
 sudo a2enmod vhost_alias
 sudo service apache2 restart
 
-#phpmyadmin
+# install phpmyadmin
 sudo apt-get -y install phpmyadmin	
 
-	
-#meld
+# install meld - for git merges
 sudo apt-get -y install meld
 	
-#curl
+# install curl
 sudo apt -y install curl
 
-#composer
+# install composer
 sudo apt-get -y install composer
 
-# php versions
-see: https://github.com/sunnysideup/silverstripe-switch-php-versions
+# install php versions
+rm /usr/local/bin/php-switch-scripts -rf
+git clone https://github.com/rapidwebltd/php-switch-scripts.git
+cd php-switch-scripts/
+bash setup.sh
+cd ..
+mv php-switch-scripts /usr/local/bin/
+cat <<EOT >> /usr/local/bin/php-switch
+if [ \$# -eq 0 ]
+  then
+    echo "Please supply the php version you would like to switch to as an argument."
+else
+   bash /usr/local/bin/php-switch-scripts/switch-to-php-\$1.sh
+fi
+EOT
+chmod +x /usr/local/bin/php-switch
+echo "you can now use php-switch X.X  to switch to any version of PHP"
 
-#test site basics
+# test installing exteions on various versions of PHP
 sudo apt-get install -y php7.4-intl
 sudo apt-get install -y php7.4-intl
 
-# etc/hosts settings
-sudo nano /etc/hosts
-echo "127.0.0.1 test.ss3" | sudo tee -a /etc/hosts
-echo "127.0.0.1 test.ss4" | sudo tee -a /etc/hosts
+# install linter
+composer global require sunnysideup/easy-coding-standards:dev-master
+composer global update
 
+# set up sites-enables - see default.conf
 sudo nano /etc/apache2/sites-enabled/default.conf
 
 
-#php settings
+# set php settings
 sudo echo "date.timezone = 'Pacific/Auckland'" >> /etc/php/7.4/apache2/php.ini
 sudo service apache2 restart
 
+# create folders for silverstripe
+mkdir /var/www/ss4
+mkdir /var/www/ss4
+mkdir /var/www/ss3
+
+# set up aliases
+sudo ln -s /var/www/ss3 /ss3
+sudo ln -s /var/www/ss4 /ss4
+sudo ln -s /var/www/ss5 /ss5
+
+# test up test site. 
 cd /var/www/ss4
+sudo nano /etc/hosts
+echo "127.0.0.1 test.ss4" | sudo tee -a /etc/hosts
 sudo chown www-data /var/www/ss4 -R #must be all www-data
-composer create-project silverstripe/installer test 4.4
+composer create-project silverstripe/installer test 4.7
 cd test
 ls
 
-#ssh
-sudo nano ~/.ssh/config
+# set up public key and create aliases
+sudo nano ~/.ssh/config 
+	
+# set up public key
 ssh-keygen
-	
-	
-#install gimp
-sudo add-apt-repository ppa:otto-kesselgulasch/gimp
-sudo apt-get -y install gimp
-wget http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-6_amd64.deb
-wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gimp/gimp-python_2.10.8-2_amd64.deb
-sudo apt install gimp gimp-plugin-registry gimp-gmic
-sudo apt install python python-cairo python-gobject-2
-sudo dpkg -i python-gtk2_2.24.0-6_amd64.deb
-sudo dpkg -i gimp-python_2.10.8-2_amd64.deb
-sudo snap install gimp
 
-# install easy coding standards
-composer global require --dev sunnysideup/easy-coding-standards:dev-master
+
+# install gimp
+# see: 
+# Uninstall GIMP
+sudo apt-get autoremove gimp gimp-plugin-registry
+# Add the following PPA
+sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+sudo apt-get update
+# Reinstall the latest GIMP
+sudo apt-get install gimp
+
+# or ...
+sudo snap install gimp --channel=edge
 
 
 # atom
@@ -101,6 +130,7 @@ cd /usr/local/bin
 curl -sS https://silverstripe.github.io/sspak/install | sudo php
 
 # install npm
+sudo apt install nodejs
 sudo apt-get -y install npm
 
 # install slack
