@@ -84,6 +84,8 @@ mysql -u root -p[as you set it]
 # install additioanl apache modules
 sudo a2enmod rewrite
 sudo a2enmod vhost_alias
+sudo a2enmod proxy
+sudo a2enmod proxy_http
 sudo service apache2 restart
 
 # install phpmyadmin
