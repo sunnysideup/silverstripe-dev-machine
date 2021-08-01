@@ -20,11 +20,12 @@ sudo apt-get update
 
 # install chrome
 https://www.google.com/chrome/
-https://linuxconfig.org/how-to-install-google-chrome-web-browser-on-ubuntu-20-04-focal-fossa
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
 
 # install git
 sudo apt-get -y install git
-git config --global core.filemode false
+git config --global corsudo e.filemode false
 
 # install meld - for git merges
 sudo apt-get -y install meld
@@ -63,7 +64,7 @@ sudo apt install nodejs
 sudo apt-get -y install npm
 
 # install slack
-sudo snap install slack --classic
+sudo snap install slack –-classic
 
 
 #########################################
@@ -160,7 +161,7 @@ ssh-keygen
 sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
 
 # create folders for silverstripe
-mkdir /var/www/ss4
+mkdir /var/www/ss3
 mkdir /var/www/ss4
 mkdir /var/www/ss3
 
