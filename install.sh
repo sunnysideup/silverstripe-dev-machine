@@ -78,7 +78,17 @@ sudo apt-get -y install apache2
 sudo apt-get install mysql-server
 sudo /usr/bin/mysql_secure_installation
 # https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
-mysql -u root -p[as you set it]
+
+sudo mysql -u root
+
+mysql> USE mysql;
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+sudo service mysql restart
+
+# mysql -u root -p[as you set it]
 # see: https://linuxconfig.org/how-to-reset-root-mysql-password-on-ubuntu-18-04-bionic-beaver-linux
 
 # install additioanl apache modules
