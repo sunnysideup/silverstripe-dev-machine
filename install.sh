@@ -64,7 +64,7 @@ sudo apt install nodejs
 sudo apt-get -y install npm
 
 # install slack
-sudo snap install slack –-classic
+sudo snap install slack --classic
 
 
 #########################################
