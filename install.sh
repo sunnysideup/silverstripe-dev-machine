@@ -184,6 +184,7 @@ ssh-keygen
 # set up sites-enables - see default.conf
 sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
 
+sudo chown ssu:www-data . -R
 # create folders for silverstripe
 mkdir /var/www/ss3
 mkdir /var/www/ss4
