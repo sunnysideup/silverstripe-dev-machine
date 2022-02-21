@@ -10,7 +10,7 @@ https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
 
 
 # get latest and greatest
-sudo apt-get update
+sudo apt -y update
 
 # Installing the necessary packages
 # add nomodeset to grub loader
@@ -25,14 +25,14 @@ sudo apt-get update
 # install chrome
 https://www.google.com/chrome/
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+sudo apt -y install ./google-chrome-stable_current_amd64.deb
 
 # install git
-sudo apt-get -y install git
+sudo apt -y install git
 git config --global corsudo e.filemode false
 
 # install meld - for git merges
-sudo apt-get -y install meld
+sudo apt -y install meld
 	
 # install curl
 sudo apt -y install curl
@@ -41,12 +41,12 @@ sudo apt -y install curl
 # install gimp
 # see: 
 # Uninstall GIMP
-sudo apt-get autoremove gimp gimp-plugin-registry
+sudo apt-get -y autoremove gimp gimp-plugin-registry
 # Add the following PPA
 sudo add-apt-repository ppa:otto-kesselgulasch/gimp
-sudo apt-get update
+sudo apt -y update
 # Reinstall the latest GIMP
-sudo apt-get install gimp
+sudo apt -y install gimp
 
 # or ...
 sudo snap install gimp --channel=edge
@@ -55,8 +55,8 @@ sudo snap install gimp --channel=edge
 # atom
 wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt-get update
-sudo apt-get -y install atom
+sudo apt -y update
+sudo apt -y install atom
 apm install atom-updater-linux
 apm install sync-settings
 # https://atom.io/packages/sync-settings
@@ -64,8 +64,8 @@ apm install sync-settings
 
 
 # install npm
-sudo apt install nodejs
-sudo apt-get -y install npm
+sudo apt -y install nodejs
+sudo apt -y install npm
 
 # install slack
 sudo snap install slack --classic
@@ -76,10 +76,10 @@ sudo snap install slack --classic
 #########################################
 
 # install apache
-sudo apt-get -y install apache2
+sudo apt -y install apache2
 	
 # install mysql
-sudo apt-get install mysql-server
+sudo apt -y  install mysql-server
 sudo /usr/bin/mysql_secure_installation
 # https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
 
@@ -103,7 +103,7 @@ sudo a2enmod proxy_http
 sudo service apache2 restart
 
 # install phpmyadmin
-sudo apt-get -y install phpmyadmin	
+sudo apt -y install phpmyadmin	
 
 
 # install php versions
@@ -126,8 +126,9 @@ echo "you can now use php-switch X.X  to switch to any version of PHP"
 
 
 # test installing exteions on various versions of PHP
-sudo apt-get install -y php7.4-intl
-sudo apt-get install -y php7.4-intl
+sudo apt install -y php7.4-intl
+sudo apt install -y php7.4-gd
+sudo apt install -y php7.4-mysqli
 
 
 
@@ -136,7 +137,7 @@ sudo apt-get install -y php7.4-intl
 #########################################
 
 # install composer
-sudo apt-get -y install composer
+sudo apt -y install composer
 nano ~/.bashrc 
 # add one of these: 
 # - PATH=~/.composer/vendor/bin:$PATH
