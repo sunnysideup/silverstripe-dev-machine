@@ -82,6 +82,10 @@ sudo apt -y install apache2
 sudo apt -y  install mysql-server
 sudo /usr/bin/mysql_secure_installation
 # https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
+# login as root to mysql then ... 
+UNINSTALL COMPONENT 'file://component_validate_password';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'new-password';
+
 
 sudo mysql -u root
 
