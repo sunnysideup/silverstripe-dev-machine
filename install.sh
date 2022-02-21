@@ -1,3 +1,7 @@
+# allow ip4:
+https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
+
+
 
 #########################################
 # BASICS
