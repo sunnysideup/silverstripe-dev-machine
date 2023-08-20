@@ -25,6 +25,9 @@ sudo apt -y update
 # SOFTWARE
 #########################################
 
+# install vs code
+https://code.visualstudio.com/download
+
 
 # install chrome
 https://www.google.com/chrome/
