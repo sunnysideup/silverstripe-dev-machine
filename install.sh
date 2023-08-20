@@ -1,6 +1,10 @@
+
+# update to latest version of ubuntu.
+https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start
+
+
 # allow ip4:
 https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
-
 
 
 #########################################
@@ -52,20 +56,23 @@ sudo apt -y install gimp
 sudo snap install gimp --channel=edge
 
 
-# atom
-wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt -y update
-sudo apt -y install atom
-apm install atom-updater-linux
-apm install sync-settings
-# https://atom.io/packages/sync-settings
+# # atom
+# wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+# sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+# sudo apt -y update
+# sudo apt -y install atom
+# apm install atom-updater-linux
+# apm install sync-settings
+# # https://atom.io/packages/sync-settings
 
 
 
 # install npm
 sudo apt -y install nodejs
 sudo apt -y install npm
+
+# install nvm
+https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/
 
 # install slack
 sudo snap install slack --classic
@@ -103,31 +110,14 @@ sudo service apache2 restart
 # install phpmyadmin
 sudo apt -y install phpmyadmin	
 
-
 # install php versions
-rm /usr/local/bin/php-switch-scripts -rf
-git clone https://github.com/rapidwebltd/php-switch-scripts.git
-cd php-switch-scripts/
-bash setup.sh
-cd ..
-mv php-switch-scripts /usr/local/bin/
-cat <<EOT >> /usr/local/bin/php-switch
-if [ \$# -eq 0 ]
-  then
-    echo "Please supply the php version you would like to switch to as an argument."
-else
-   bash /usr/local/bin/php-switch-scripts/switch-to-php-\$1.sh
-fi
-EOT
-chmod +x /usr/local/bin/php-switch
-echo "you can now use php-switch X.X  to switch to any version of PHP"
+git clone https://github.com/sunnysideup/silverstripe-switch-php-versions.git
 
+# install
+sudo bash silverstripe-switch-php-versions/install.sh
 
-# test installing exteions on various versions of PHP
-sudo apt install -y php7.4-intl
-sudo apt install -y php7.4-gd
-sudo apt install -y php7.4-mysqli
-
+# remove install files
+rm silverstripe-switch-php-versions -rf
 
 
 #########################################
