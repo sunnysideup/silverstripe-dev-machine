@@ -16,9 +16,16 @@ https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
 # get latest and greatest
 sudo apt -y update
 
+#########################################
+# DISPLAYS
+#########################################
+
 # Installing the necessary packages
-# add nomodeset to grub loader
-# this may help with getting the screens working.
+# Add nomodeset to grub loader this may help with getting the screens working.
+
+# If your machine is only detecting one display you might have to blacklist simpledrm
+# Run `dmesg | grep -i drm` to check if simpledrm is being loaded
+# If it is append `modprobe.blacklist=simpledrm` to `GRUB_CMDLINE_LINUX_DEFAULT`
 
 
 #########################################
