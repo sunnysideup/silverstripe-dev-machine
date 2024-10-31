@@ -203,9 +203,7 @@ sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
 sudo chown ssu:www-data . -R
 
 # Create folders for silverstripe
-mkdir /var/www/ss3
-mkdir /var/www/ss4
-mkdir /var/www/ss5
+mkdir -p /var/www/ss{3..5}
 
 # Set up aliases
 sudo ln -s /var/www/ss3 /ss3
