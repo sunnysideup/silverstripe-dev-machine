@@ -50,9 +50,6 @@ sudo apt -y install meld
 # Install curl
 sudo apt -y install curl
 
-
-# Install gimp
- 
 # Uninstall GIMP
 sudo apt-get -y autoremove gimp gimp-plugin-registry
 
@@ -60,11 +57,10 @@ sudo apt-get -y autoremove gimp gimp-plugin-registry
 sudo add-apt-repository ppa:otto-kesselgulasch/gimp
 sudo apt -y update
 
-# Reinstall the latest GIMP
+# Install the latest GIMP
 sudo apt -y install gimp
 
 # Or... sudo snap install gimp --channel=edge
-
 
 # Atom - Uncomment the below lines to install Atom
 # wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
@@ -74,8 +70,6 @@ sudo apt -y install gimp
 # apm install atom-updater-linux
 # apm install sync-settings
 # https://atom.io/packages/sync-settings
-
-
 
 # Install npm
 sudo apt -y install nodejs
@@ -187,7 +181,6 @@ composer global update
 # Set up public key and create aliases
 sudo nano ~/.ssh/config 
 	
-
 # Set php settings
 sudo echo "date.timezone = 'Pacific/Auckland'" >> /etc/php/7.4/apache2/php.ini
 sudo service apache2 restart
@@ -199,7 +192,6 @@ ssh-keygen
 #########################################
 # SILVERSTRIPE
 #########################################
-
 
 # Set up sites-enables - see default.conf
 sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
@@ -218,7 +210,6 @@ sudo ln -s /var/www/ss5 /ss5
 cd /usr/local/bin
 curl -sS https://silverstripe.github.io/sspak/install | sudo php
 
-
 # Test up test site. 
 cd /var/www/ss4
 echo "127.0.0.1 test.ss4" | sudo tee -a /etc/hosts
@@ -230,5 +221,3 @@ ls
 # Install sake
 cd /var/www/ss4/test
 sudo ./vendor/bin/sake installsake
-
-
