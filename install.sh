@@ -66,14 +66,14 @@ sudo apt -y install gimp
 # Or... sudo snap install gimp --channel=edge
 
 
-# # atom
+# Atom - Uncomment the below lines to install Atom
 # wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 # sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
 # sudo apt -y update
 # sudo apt -y install atom
 # apm install atom-updater-linux
 # apm install sync-settings
-# # https://atom.io/packages/sync-settings
+# https://atom.io/packages/sync-settings
 
 
 
