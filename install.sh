@@ -153,11 +153,15 @@ rm silverstripe-switch-php-versions -rf
 
 # Install composer
 sudo apt -y install composer
-nano ~/.bashrc 
-# add one of these: 
-# - PATH=~/.composer/vendor/bin:$PATH
-# - PATH=~/.config/composer/vendor/bin:$PATH
-# reload ~/.bashrc
+
+if [ -d "$HOME/.composer/vendor/bin" ]; then
+    echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+elif [ -d "$HOME/.config/composer/vendor/bin" ]; then
+    echo 'export PATH="$HOME/.config/composer/vendor/bin:$PATH"' >> ~/.bashrc
+else
+    echo "ERROR: No composer folder"
+fi
+
 source ~/.bashrc
 #OR
 echo "- PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.bashrc
