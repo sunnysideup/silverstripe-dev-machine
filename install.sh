@@ -110,6 +110,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 echo "
 # manually added - nvm use latest npm / node
 nvm use node" >> ~/.bashrc
+source ~/.bashrc
 
 echo "
 --- 
@@ -176,7 +177,9 @@ echo "
 --- 
 Installing Composer and adding path to bashrc"
 sudo apt -y install composer
-echo "- PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.bashrc
+echo "
+# manually added composer to path
+PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
 
 echo "
