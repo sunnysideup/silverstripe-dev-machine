@@ -1,148 +1,175 @@
 #!/bin/bash
 
-# Update to the latest version of Ubuntu
-echo -e "\e[33m[INFO] --- Updating to the latest version of Ubuntu.\e[0m"
-echo "More info: https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start"
+echo "#########################################"
+echo "# UPDATING UBUNTU TO LATEST VERSION"
+echo "#########################################"
 
-# Allow IPv4 support
-echo -e "\e[33m[INFO] --- Allowing IPv4 support.\e[0m"
-echo "See: https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs"
-
-#########################################
-# BASICS
-#########################################
-
-echo -e "\e[33m[INFO] --- Updating package lists.\e[0m"
+echo "
+--- Update to the latest version of Ubuntu.
+https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start
+"
 sudo apt -y update
 
-#########################################
-# DISPLAYS
-#########################################
+echo "
+--- Allow IPv4 support:
+https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
+"
 
-echo -e "\e[33m[INFO] --- Installing display packages and configuring settings.\e[0m"
-# Instructions to help configure multiple displays and fix issues with simpledrm
+echo "#########################################"
+echo "# BASICS"
+echo "#########################################"
 
-#########################################
-# SOFTWARE
-#########################################
+echo "--- Updating package lists to latest and greatest"
+sudo apt -y update
 
-echo -e "\e[33m[INFO] --- Installing VS Code.\e[0m"
+echo "#########################################"
+echo "# DISPLAYS"
+echo "#########################################"
+
+echo "--- Installing necessary packages for displays"
+echo "--- Add nomodeset to GRUB loader; this may help with screen detection."
+
+echo "--- If only one display is detected, consider blacklisting simpledrm"
+echo "--- Run dmesg | grep -i drm to check if simpledrm is loading"
+echo "--- Append modprobe.blacklist=simpledrm to GRUB_CMDLINE_LINUX_DEFAULT if needed"
+
+echo "#########################################"
+echo "# SOFTWARE"
+echo "#########################################"
+
+echo "--- Installing VS Code (automated repository addition)"
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt -y update && sudo apt -y install code
 
-echo -e "\e[33m[INFO] --- Installing Google Chrome.\e[0m"
+echo "
+--- Installing Google Chrome
+https://www.google.com/chrome/
+"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt -y install ./google-chrome-stable_current_amd64.deb
 
-echo -e "\e[33m[INFO] --- Installing Git and configuring settings.\e[0m"
+echo "--- Installing Git and configuring settings"
 sudo apt -y install git
 git config --global core.filemode false
 
-echo -e "\e[33m[INFO] --- Installing Meld for Git merges.\e[0m"
+echo "--- Installing Meld for Git merges"
 sudo apt -y install meld
 
-echo -e "\e[33m[INFO] --- Installing Curl.\e[0m"
+echo "--- Installing Curl"
 sudo apt -y install curl
 
-echo -e "\e[33m[INFO] --- Installing and configuring GIMP.\e[0m"
+echo "--- Installing GIMP with custom repository"
 sudo apt-get -y autoremove gimp gimp-plugin-registry
 sudo add-apt-repository ppa:otto-kesselgulasch/gimp
 sudo apt -y update
 sudo apt -y install gimp
 
-echo -e "\e[33m[INFO] --- Installing Node.js and npm.\e[0m"
+echo "--- Installing GIMP via snap (alternative)"
+sudo snap install gimp --channel=edge
+
+echo "--- Installing Node.js and npm"
 sudo apt -y install nodejs
 sudo apt -y install npm
 
-echo -e "\e[33m[INFO] --- Installing nvm.\e[0m"
+echo "--- Installing nvm (Node Version Manager)"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-echo -e "\e[33m[INFO] --- Installing Slack.\e[0m"
+echo "--- Installing Slack via snap"
 sudo snap install slack --classic
 
-#########################################
-# LAMP
-#########################################
+echo "#########################################"
+echo "# LAMP"
+echo "#########################################"
 
-echo -e "\e[33m[INFO] --- Installing Apache.\e[0m"
+echo "--- Installing Apache"
 sudo apt -y install apache2
 
-echo -e "\e[33m[INFO] --- Installing MySQL.\e[0m"
+echo "--- Installing MySQL and securing installation"
 sudo apt -y install mysql-server
 sudo /usr/bin/mysql_secure_installation
 
-echo -e "\e[33m[INFO] --- Restarting MySQL service.\e[0m"
+echo "--- Setting up MySQL root user and privileges"
+sudo mysql -u root -p
+mysql> flush privileges;
+mysql> use mysql;
+mysql> UNINSTALL COMPONENT 'file://component_validate_password';
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+mysql> UPDATE user SET plugin="mysql_native_password" WHERE User='root';
+mysql> quit;
 sudo pkill mysqld
 sudo service mysql restart
 
-echo -e "\e[33m[INFO] --- Enabling Apache modules.\e[0m"
+echo "--- Enabling Apache modules"
 sudo a2enmod rewrite
 sudo a2enmod vhost_alias
 sudo a2enmod proxy
 sudo a2enmod proxy_http
 sudo service apache2 restart
 
-echo -e "\e[33m[INFO] --- Installing phpMyAdmin.\e[0m"
+echo "--- Installing phpMyAdmin"
 sudo apt -y install phpmyadmin
 
-echo -e "\e[33m[INFO] --- Installing PHP switcher.\e[0m"
+echo "--- Installing multiple PHP versions via SilverStripe switch"
 git clone https://github.com/sunnysideup/silverstripe-switch-php-versions.git
 sudo bash silverstripe-switch-php-versions/install.sh
 rm silverstripe-switch-php-versions -rf
 
-#########################################
-# COMPOSER
-#########################################
+echo "#########################################"
+echo "# COMPOSER"
+echo "#########################################"
 
-echo -e "\e[33m[INFO] --- Installing Composer.\e[0m"
+echo "--- Installing Composer and adding path to bashrc"
 sudo apt -y install composer
-
-echo -e "\e[33m[INFO] --- Setting up Composer environment.\e[0m"
 echo "- PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
 
-echo -e "\e[33m[INFO] --- Installing Composer linter.\e[0m"
+echo "--- Downloading and verifying Composer installer"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+
+echo "--- Installing linter via Composer"
 composer global require sunnysideup/easy-coding-standards:dev-master
 composer global update
 
-#########################################
-# SETTINGS
-#########################################
+echo "#########################################"
+echo "# SETTINGS"
+echo "#########################################"
 
-echo -e "\e[33m[INFO] --- Configuring SSH keys.\e[0m"
+echo "--- Setting up SSH public key and creating aliases"
 sudo nano ~/.ssh/config 
 
-echo -e "\e[33m[INFO] --- Setting PHP timezone.\e[0m"
+echo "--- Configuring PHP timezone setting"
 sudo echo "date.timezone = 'Pacific/Auckland'" >> /etc/php/7.4/apache2/php.ini
 sudo service apache2 restart
 
-echo -e "\e[33m[INFO] --- Generating SSH key.\e[0m"
+echo "--- Generating SSH key"
 ssh-keygen
 
-#########################################
-# SILVERSTRIPE
-#########################################
+echo "#########################################"
+echo "# SILVERSTRIPE"
+echo "#########################################"
 
-echo -e "\e[33m[INFO] --- Setting up SilverStripe directories and configurations.\e[0m"
+echo "--- Configuring Apache sites-enabled for SilverStripe"
 sudo nano /etc/apache2/sites-enabled/sites-enabled.conf
 sudo chown ssu:www-data . -R
-mkdir /var/www/ss3
-mkdir /var/www/ss4
-mkdir /var/www/ss5
+mkdir /var/www/ss3 /var/www/ss4 /var/www/ss5
 
-echo -e "\e[33m[INFO] --- Creating symbolic links for SilverStripe installations.\e[0m"
+echo "--- Creating symbolic links for SilverStripe folders"
 sudo ln -s /var/www/ss3 /ss3
 sudo ln -s /var/www/ss4 /ss4
 sudo ln -s /var/www/ss5 /ss5
 
-echo -e "\e[33m[INFO] --- Installing SSPak.\e[0m"
+echo "--- Installing SSPak for SilverStripe"
 cd /usr/local/bin
 curl -sS https://silverstripe.github.io/sspak/install | sudo php
 
-echo -e "\e[33m[INFO] --- Setting up test SilverStripe site.\e[0m"
+echo "--- Setting up test site for SilverStripe 4"
 cd /var/www/ss4
 echo "127.0.0.1 test.ss4" | sudo tee -a /etc/hosts
 sudo chown www-data /var/www/ss4 -R
@@ -150,6 +177,6 @@ composer create-project silverstripe/installer test 4.7
 cd test
 ls
 
-echo -e "\e[33m[INFO] --- Installing Sake for SilverStripe.\e[0m"
+echo "--- Installing sake for SilverStripe"
 cd /var/www/ss4/test
 sudo ./vendor/bin/sake installsake
