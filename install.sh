@@ -25,8 +25,10 @@ sudo apt -y update
 # SOFTWARE
 #########################################
 
-# install vs code
-https://code.visualstudio.com/download
+# Install VS Code (automated repository addition)
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt -y update && sudo apt -y install code
 
 
 # install chrome
