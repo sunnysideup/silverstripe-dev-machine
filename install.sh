@@ -77,7 +77,10 @@ sudo apt -y install nodejs
 sudo apt -y install npm
 
 # install nvm
-https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/
+# https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # install slack
 sudo snap install slack --classic
