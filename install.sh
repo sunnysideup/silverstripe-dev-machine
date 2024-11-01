@@ -7,13 +7,15 @@ echo "# UPDATING UBUNTU TO LATEST VERSION"
 echo "#########################################"
 
 echo "
---- Update to the latest version of Ubuntu.
+--- 
+Update to the latest version of Ubuntu.
 https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start
 "
 sudo apt -y update
 
 echo "
---- Allow IPv4 support:
+--- 
+Allow IPv4 support:
 https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs
 "
 
@@ -24,7 +26,8 @@ echo "# BASICS"
 echo "#########################################"
 
 echo "
---- Updating package lists to latest and greatest"
+--- 
+Updating package lists to latest and greatest"
 sudo apt -y update
 
 echo "
@@ -34,16 +37,13 @@ echo "# DISPLAYS"
 echo "#########################################"
 
 echo "
---- Installing necessary packages for displays"
-echo "
---- Add nomodeset to GRUB loader; this may help with screen detection."
-
-echo "
---- If only one display is detected, consider blacklisting simpledrm"
-echo "
---- Run dmesg | grep -i drm to check if simpledrm is loading"
-echo "
---- Append modprobe.blacklist=simpledrm to GRUB_CMDLINE_LINUX_DEFAULT if needed"
+--- 
+Installing necessary packages for displays:
+---
+Add nomodeset to GRUB loader; this may help with screen detection.
+If only one display is detected, consider blacklisting simpledrm
+Run dmesg | grep -i drm to check if simpledrm is loading
+Append modprobe.blacklist=simpledrm to GRUB_CMDLINE_LINUX_DEFAULT if needed"
 
 echo "
 
