@@ -90,6 +90,12 @@ sudo apt -y install apache2
 	
 # install mysql
 sudo apt -y  install mysql-server
+# VALIDATE PASSWORD COMPONENT :n
+# Remove anonymous users?: n
+# Disallow root login remotely?: y
+# Remove test database and access to it? : y
+# Reload privilege tables now?: y
+
 sudo /usr/bin/mysql_secure_installation
 # https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
 # login as root to mysql then ... 
@@ -139,6 +145,8 @@ nano ~/.bashrc
 # - PATH=~/.config/composer/vendor/bin:$PATH
 # reload ~/.bashrc
 source ~/.bashrc
+#OR
+echo "- PATH=~/.config/composer/vendor/bin:$PATH" >> ~/.bashrc
 
 #https://getcomposer.org/download/
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
