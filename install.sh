@@ -139,7 +139,10 @@ sudo apt -y install phpmyadmin
 # Install php versions
 git clone https://github.com/sunnysideup/silverstripe-switch-php-versions.git
 
-# Install
+sudo apt install php8.3-intl
+sudo apt install libapache2-mod-php8.3
+
+# Install php version switch
 sudo bash silverstripe-switch-php-versions/install.sh
 
 # Remove install files
