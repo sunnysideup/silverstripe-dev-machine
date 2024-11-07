@@ -216,7 +216,7 @@ curl -sS https://silverstripe.github.io/sspak/install | sudo php
 # Test up test site. 
 cd /var/www/ss4
 echo "127.0.0.1 test.ss4" | sudo tee -a /etc/hosts
-sudo chown www-data /var/www/ss4 -R #must be all www-data
+sudo chown www-data /var/www/ss4 -R # Must be all www-data
 composer create-project silverstripe/installer test 4.7
 cd test
 ls
