@@ -165,7 +165,6 @@ sudo service mysql restart
 # mysql -u root -p[as you set it]
 # See: https://linuxconfig.org/how-to-reset-root-mysql-password-on-ubuntu-18-04-bionic-beaver-linux
 
-# Install additioanl apache modules
 echo "
 --- 
 Setting up MySQL root user and privileges
@@ -187,6 +186,7 @@ Enabling Apache modules
 sudo a2enmod rewrite
 sudo a2enmod vhost_alias
 sudo a2enmod proxy
+sudo a2enmod headers
 sudo a2enmod proxy_http
 sudo apt install libapache2-mod-php8.3
 sudo service apache2 restart
