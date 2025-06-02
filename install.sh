@@ -113,9 +113,23 @@ sudo service apache2 restart
 
 
 print_header "Creating folder structure"
-sudo mkdir -p /var/www/{ss3,ss4,ss5,craft,wp,upgrader,upgrades}
-sudo chown $USER:www-data /var/www -R
-sudo ln -s /var/www/ss{3..5} / && sudo ln -s /var/www/{craft,wp} /
+
+# Define the list of directories
+dirs=(ss3 ss4 ss5 craft wp upgrader upgrades)
+
+# Create directories
+for dir in "${dirs[@]}"; do
+    sudo mkdir -p "/var/www/$dir"
+done
+
+# Set ownership
+sudo chown "$USER:www-data" /var/www -R
+
+# Create symbolic links in root
+for dir in "${dirs[@]}"; do
+    sudo ln -s "/var/www/$dir" "/$dir"
+done
+
 
 print_header "Installing SSPak for SilverStripe"
 cd /usr/local/bin
