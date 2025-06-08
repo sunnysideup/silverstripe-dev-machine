@@ -145,6 +145,18 @@ composer create-project silverstripe/installer test
 cd test && sudo ./vendor/bin/sake installsake
 
 
+# Find all php.ini files under /etc/php/*/
+find /etc/php/ -type f -path '*/php.ini' | while read -r iniFile; do
+    echo "Updating $iniFile"
+
+    # Change display_errors to On
+    sed -i 's/^\s*display_errors\s*=.*/display_errors = On/' "$iniFile"
+
+    # Change display_startup_errors to On
+    sed -i 's/^\s*display_startup_errors\s*=.*/display_startup_errors = On/' "$iniFile"
+done
+
+
 print_header "Generating SSH key"
 ssh-keygen
 
