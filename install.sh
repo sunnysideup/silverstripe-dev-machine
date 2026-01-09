@@ -66,8 +66,39 @@ sudo snap install slack --classic
 print_header "Installing Apache"
 sudo apt -y install apache2
 
-print_header "Installing MySQL"
-sudo apt -y install mysql-server
+print_header "Installing MariaBD"
+
+rootPass='x'
+
+sudo apt install -y mariadb-server
+
+sudo systemctl enable --now mariadb
+
+# Force local-only listening
+confFile='/etc/mysql/mariadb.conf.d/50-server.cnf'
+if sudo grep -qE '^\s*bind-address\s*=' "$confFile"; then
+  sudo sed -i -E 's/^\s*bind-address\s*=.*/bind-address = 127.0.0.1/' "$confFile"
+else
+  # Appending keeps it inside the existing [mysqld] section in this file
+  echo 'bind-address = 127.0.0.1' | sudo tee -a "$confFile" >/dev/null
+fi
+
+sudo systemctl restart mariadb
+
+# Set root password (tries the common path first)
+sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${rootPass}'; FLUSH PRIVILEGES;" || true
+
+# If Ubuntu installed root with unix_socket auth, switch it to password auth
+plugin="$(sudo mariadb -Nse "SELECT plugin FROM mysql.user WHERE User='root' AND Host='localhost' LIMIT 1;" || true)"
+if [ "$plugin" = 'unix_socket' ]; then
+  sudo mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('${rootPass}'); FLUSH PRIVILEGES;"
+fi
+
+# Quick check
+mariadb -uroot -p"${rootPass}" -e "SELECT VERSION() AS mariadb_version;"
+
+print_header 'Done. Local-only MariaDB installed. Login: mariadb -uroot -px'
+
 
 print_header "Enabling Apache modules"
 sudo a2enmod rewrite vhost_alias proxy headers proxy_http
