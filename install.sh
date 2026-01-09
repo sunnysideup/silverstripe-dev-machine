@@ -7,7 +7,8 @@ print_header() {
     echo "---"
     echo "$1"
     echo "---"
-    echo "\n\n"
+    echo ""
+    echo ""
     [ -n "$2" ] && echo "$2"
 }
 
