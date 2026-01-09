@@ -23,9 +23,9 @@ sudo apt -y update
 print_header "Installing necessary packages for displays" "Check GRUB and blacklist simpledrm if needed"
 
 print_header "Installing VS Code"
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt -y update && sudo apt -y install code
+sudo apt update
+sudo apt install -y snapd
+sudo snap install -y --classic code
 
 print_header "Installing Google Chrome" "https://www.google.com/chrome/"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
