@@ -192,22 +192,9 @@ done
 print_header "Generating SSH key"
 ssh-keygen
 
-print_header "THE END"
-
-print_header "Setting up MySQL root user and privileges"
-cat << EOF
-Run in MySQL:
-flush privileges;
-use mysql;
-UNINSTALL COMPONENT 'file://component_validate_password';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '';
-UPDATE user SET plugin="mysql_native_password" WHERE User='root';
-quit;
-
-Then:
-sudo pkill mysqld
-sudo service mysql restart
-EOF
-
 print_header "Setting up SSH public key and creating aliases"
 sudo nano ~/.ssh/config
+
+print_header "======================================================="
+print_header "THE END"
+print_header "======================================================="
