@@ -58,6 +58,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="${XDG_CONFIG_HOME:-$HOME/.nvm}"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 echo "nvm use node" >> ~/.bashrc
+nvm install node
 source ~/.bashrc
 
 print_header "Installing Slack via snap"
