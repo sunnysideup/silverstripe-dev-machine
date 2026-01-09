@@ -195,6 +195,13 @@ ssh-keygen
 print_header "Setting up SSH public key and creating aliases"
 sudo nano ~/.ssh/config
 
+print_header "install easy coding standards"
+composer global config minimum-stability dev
+composer global config prefer-stable true
+composer global require sunnysideup/easy-coding-standards:dev-master
+source ~/.bashrc
+
+
 print_header "======================================================="
 print_header "THE END"
 print_header "======================================================="
