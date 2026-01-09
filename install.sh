@@ -102,7 +102,7 @@ print_header 'Done. Local-only MariaDB installed. Login: mariadb -uroot -px'
 
 print_header "Enabling Apache modules"
 sudo a2enmod rewrite vhost_alias proxy headers proxy_http
-sudo apt install libapache2-mod-php8.3
+sudo apt -y install libapache2-mod-php8.3
 sudo service apache2 restart
 
 print_header "Installing SilverStripe PHP version switcher"
