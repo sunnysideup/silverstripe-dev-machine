@@ -204,6 +204,19 @@ composer global require sunnysideup/easy-coding-standards:dev-master
 source ~/.bashrc
 
 
+print_header "install easy coding standards"
+composer global config minimum-stability dev
+composer global config prefer-stable true
+composer global require sunnysideup/easy-coding-standards:dev-master --prefer-source
+cat << 'EOF' >> ~/.bashrc
+
+# Add composer path
+PATH=~/.config/composer/vendor/bin:$PATH
+EOF
+source ~/.bashrc
+
+
+
 print_header "======================================================="
 print_header "THE END"
 print_header "======================================================="
