@@ -111,6 +111,7 @@ cd ~
 git clone https://github.com/sunnysideup/silverstripe-switch-php-versions.git
 sudo bash silverstripe-switch-php-versions/install.sh
 rm -rf silverstripe-switch-php-versions
+php-switch 8.3
 
 print_header "Installing Composer and adding to PATH"
 sudo apt -y install composer
