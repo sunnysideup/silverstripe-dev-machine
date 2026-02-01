@@ -67,6 +67,29 @@ sudo snap install slack --classic
 print_header "Installing Apache"
 sudo apt -y install apache2
 
+print_header "Installing Apache site enabled"
+
+echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/servername.conf >/dev/null
+sudo a2enconf servername
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+
+sudo curl -fsSL \
+  'https://raw.githubusercontent.com/sunnysideup/silverstripe-dev-machine/refs/heads/master/sites-enabled.conf' \
+  -o /etc/apache2/sites-available/silverstripe-dev-machine.conf
+
+# required by directives used 
+sudo a2enmod rewrite vhost_alias access_compat
+
+# enable the site (creates symlink into sites-enabled)
+sudo a2ensite silverstripe-dev-machine.conf
+
+# sanity check + reload
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+systemctl daemon-reload
+
+
 print_header "Installing MariaBD"
 
 rootPass='x'
