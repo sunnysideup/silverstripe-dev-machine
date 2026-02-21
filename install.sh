@@ -26,6 +26,7 @@ print_header "Installing VS Code"
 sudo apt update
 sudo apt install -y snapd
 sudo snap install -y --classic code
+sudo snap install code --classic 
 
 print_header "Installing Google Chrome" "https://www.google.com/chrome/"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
