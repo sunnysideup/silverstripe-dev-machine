@@ -17,6 +17,10 @@ sudo apt -y update
 
 print_header "Allow IPv4 support:" "https://askubuntu.com/questions/1123177/sudo-add-apt-repository-hangs"
 
+print_header "set up keyring for vs code"
+sudo apt -y update
+sudo apt -y install gnome-keyring libsecret-1-0 libsecret-1-dev seahorse
+
 print_header "Updating package lists to latest and greatest"
 sudo apt -y update
 
