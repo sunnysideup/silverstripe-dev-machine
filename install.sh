@@ -156,7 +156,7 @@ sudo mv composer.phar /usr/local/bin/composer
 print_header "Installing linter via Composer"
 composer global config minimum-stability dev
 composer global require sunnysideup/easy-coding-standards:dev-master --prefer-source
-composer global update
+composer global update --prefer-source
 composer -v
 if [ -d "$HOME/.composer/vendor/bin" ]; then
     echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
