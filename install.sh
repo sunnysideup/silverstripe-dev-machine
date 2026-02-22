@@ -19,6 +19,7 @@ snap_refresh(){
     sudo systemctl start snapd.socket
     sudo systemctl start snapd.service
     sudo snap refresh
+    reboot
 }
 
 print_header "Update to the latest version of Ubuntu." "https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start"
