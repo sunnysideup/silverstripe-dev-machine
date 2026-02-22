@@ -12,6 +12,15 @@ print_header() {
     [ -n "$2" ] && echo "$2"
 }
 
+snap_refresh(){
+    sudo systemctl stop snapd.service snapd.socket
+    sudo systemctl restart systemd-udevd
+    sudo systemctl daemon-reload
+    sudo systemctl start snapd.socket
+    sudo systemctl start snapd.service
+    sudo snap refresh
+}
+
 print_header "Update to the latest version of Ubuntu." "https://ubuntu.com/tutorials/upgrading-ubuntu-desktop#1-before-you-start"
 sudo apt -y update
 
@@ -29,13 +38,9 @@ print_header "Installing necessary packages for displays" "Check GRUB and blackl
 print_header "Installing Snap"
 sudo apt update
 sudo apt install -y snapd
-sudo systemctl restart snapd
-sudo snap refresh
-sudo snap install core
-sudo snap refresh core snapd
+snap_refresh
 
 print_header "Installing VS Code"
-sudo snap install -y --classic code
 sudo snap install code --classic 
 
 print_header "Installing Google Chrome" "https://www.google.com/chrome/"
@@ -59,6 +64,7 @@ sudo apt -y update
 sudo apt -y install gimp
 
 print_header "Installing GIMP via snap (alternative)"
+snap_refresh
 sudo snap install gimp --channel=edge
 
 print_header "Installing Node.js and npm"
@@ -73,7 +79,7 @@ nvm install node
 source ~/.bashrc
 
 print_header "Installing Slack via snap"
-sudo snap install slack --classic
+snap_refresh
 sudo snap install slack
 
 print_header "Installing Apache"
