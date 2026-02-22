@@ -26,9 +26,13 @@ sudo apt -y update
 
 print_header "Installing necessary packages for displays" "Check GRUB and blacklist simpledrm if needed"
 
-print_header "Installing VS Code"
+print_header "Installing Snap"
 sudo apt update
 sudo apt install -y snapd
+sudo systemctl restart snapd
+sudo snap refresh
+
+print_header "Installing VS Code"
 sudo snap install -y --classic code
 sudo snap install code --classic 
 
