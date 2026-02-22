@@ -31,6 +31,8 @@ sudo apt update
 sudo apt install -y snapd
 sudo systemctl restart snapd
 sudo snap refresh
+sudo snap install core
+sudo snap refresh core snapd
 
 print_header "Installing VS Code"
 sudo snap install -y --classic code
