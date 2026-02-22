@@ -68,6 +68,7 @@ source ~/.bashrc
 
 print_header "Installing Slack via snap"
 sudo snap install slack --classic
+sudo snap install slack
 
 print_header "Installing Apache"
 sudo apt -y install apache2
