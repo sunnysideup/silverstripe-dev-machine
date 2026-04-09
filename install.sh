@@ -258,6 +258,7 @@ EOF
 source ~/.bashrc
 
 print_header "install semgrep"
+sudo apt install pipx
 pipx install semgrep
 
 print_header "install gitleaks"
