@@ -260,6 +260,12 @@ source ~/.bashrc
 print_header "install semgrep"
 pipx install semgrep
 
+print_header "install gitleaks"
+sudo tar -xf gitleaks.tar.gz -C /usr/local/bin gitleaks
+sudo tar -xf gitleaks_8.30.1_linux_x64.tar.gz -C /usr/local/bin gitleaks
+gitleaks version
+rm gitleaks_8.30.1_linux_x64.tar.gz -f
+
 print_header "======================================================="
 print_header "THE END"
 print_header "======================================================="
