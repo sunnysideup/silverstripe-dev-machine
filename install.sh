@@ -257,7 +257,8 @@ PATH=~/.config/composer/vendor/bin:$PATH
 EOF
 source ~/.bashrc
 
-
+print_header "install semgrep"
+pipx install semgrep
 
 print_header "======================================================="
 print_header "THE END"
