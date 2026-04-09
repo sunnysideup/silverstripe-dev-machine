@@ -262,10 +262,10 @@ sudo apt install pipx
 pipx install semgrep
 
 print_header "install gitleaks"
-sudo tar -xf gitleaks.tar.gz -C /usr/local/bin gitleaks
-sudo tar -xf gitleaks_8.30.1_linux_x64.tar.gz -C /usr/local/bin gitleaks
-gitleaks version
-rm gitleaks_8.30.1_linux_x64.tar.gz -f
+GITLEAKS_VERSION=$(curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest | grep tag_name | cut -d '"' -f4 | sed 's/v//')
+wget https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+tar -xzf gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+sudo mv gitleaks /usr/local/bin/
 
 print_header "======================================================="
 print_header "THE END"
