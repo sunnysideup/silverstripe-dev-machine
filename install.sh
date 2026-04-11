@@ -267,6 +267,10 @@ wget https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}
 tar -xzf gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
 sudo mv gitleaks /usr/local/bin/
 
+sudo snap install go --classic
+hash -r
+sudo apt  install shfmt
+
 print_header "======================================================="
 print_header "THE END"
 print_header "======================================================="
