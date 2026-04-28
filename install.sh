@@ -51,6 +51,7 @@ sudo apt -y install ./google-chrome-stable_current_amd64.deb
 print_header "Installing Git and configuring settings"
 sudo apt -y install git
 git config --global core.filemode false
+git config --global url."git@github.com:".insteadOf "https://github.com/"
 
 print_header "Installing Meld for Git merges"
 sudo apt -y install meld
