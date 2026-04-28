@@ -52,6 +52,7 @@ print_header "Installing Git and configuring settings"
 sudo apt -y install git
 git config --global core.filemode false
 git config --global url."git@github.com:".insteadOf "https://github.com/"
+git config --global url."git@bitbucket.org:".insteadOf "https://bitbucket.org/"
 
 print_header "Installing Meld for Git merges"
 sudo apt -y install meld
