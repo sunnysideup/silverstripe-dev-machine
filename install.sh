@@ -169,6 +169,16 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 
+print_header "setup settings for composer"
+composer config --global preferred-install source
+composer config --global github-protocols ssh
+
+print_header "Intalling Upgrader via composer"
+mkdir -p /var/www/upgrader/
+cd /var/www/upgrader/
+git clone git@github.com:sunnysideup/silverstripe-upgrade-silverstripe.git .
+composer install --prefer-source
+
 print_header "Installing linter via Composer"
 composer global config minimum-stability dev
 composer global require sunnysideup/easy-coding-standards:dev-master --prefer-source
