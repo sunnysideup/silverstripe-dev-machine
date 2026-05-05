@@ -144,6 +144,8 @@ mariadb -uroot -p"${rootPass}" -e "SELECT VERSION() AS mariadb_version;"
 
 print_header 'Done. Local-only MariaDB installed. Login: mariadb -uroot -px'
 
+print_header "Adding TimeZones"
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
 
 print_header "Enabling Apache modules"
 sudo a2enmod rewrite vhost_alias proxy headers proxy_http
