@@ -85,6 +85,9 @@ print_header "Installing Slack via snap"
 snap_refresh
 sudo snap install slack
 
+print_header "Installing htop"
+sudo apt -y install htop
+
 print_header "Installing Apache"
 sudo apt -y install apache2
 
